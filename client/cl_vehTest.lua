@@ -9,9 +9,9 @@ end)
 
 RegisterCommand('test', function(source, args, rawCommand)
     local veh = args[1]
-    local time = 3000
+    local time = 3000 -- temps de test en ms
     local sorti = false
-    local temps = 30
+    local temps = 30 -- temps de test en s
     local lastPos = GetEntityCoords(PlayerPedId())
     if veh ~= nil then
         RequestModel(veh)
@@ -19,7 +19,7 @@ RegisterCommand('test', function(source, args, rawCommand)
         ESX.ShowAdvancedNotification('vehTest', '', 'Profite bien de tes 30 secondes de test !', 'CHAR_CARSITE', 2) -- notif début
         SetEntityCoords(PlayerPedId(), -963.1749, -3358.958, 13.9772) -- lieu de tp pour tester
         local pos = GetEntityCoords(PlayerPedId())
-        local vehicle = CreateVehicle(veh, pos.x, pos.y, pos.z, 90, true, false)
+        local vehicle = CreateVehicle(veh, pos.x, pos.y, pos.z, 57.42, true, false) -- heading
         TaskWarpPedIntoVehicle(PlayerPedId(), vehicle, -1)
         Wait(100)
         while time > 0 do
@@ -28,7 +28,7 @@ RegisterCommand('test', function(source, args, rawCommand)
                 temps = time /100
                 RageUI.Text({message='~g~'..math.floor(temps + 0.5*0).. ' ~w~secondes restantes'})
             else
-                ESX.ShowAdvancedNotification('vehTest', '', 'Tu es sorti du véhicule !', 'CHAR_CARSITE', 2) -- notif fin
+                ESX.ShowAdvancedNotification('vehTest', '', 'Tu es sorti du véhicule !', 'CHAR_CARSITE', 2) -- notif sorti véhicule
                 sorti = true
                 time = 0
             end
